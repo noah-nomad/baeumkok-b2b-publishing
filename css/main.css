@@ -1018,6 +1018,19 @@ body {
   background-color: white;
 }
 
+.invoice_info__wrap {
+  display: flex;
+}
+.invoice_info dl {
+  display: flex;
+}
+.invoice_info dt {
+  color: rgba(33, 33, 33, 0.3);
+}
+.invoice_info dd {
+  color: rgba(33, 33, 33, 0.6);
+}
+
 /*----------유튜브--------------------------------------------------------------------------------*/
 .video-wrap {
   position: relative;

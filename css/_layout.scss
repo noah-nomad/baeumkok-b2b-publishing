@@ -442,3 +442,21 @@ body {
     }
   }
 }
+
+.invoice_info {
+  &__wrap {
+    display: flex;
+  }
+
+  dl {
+    display: flex;
+  }
+
+  dt {
+    color: $dark-30;
+  }
+
+  dd {
+    color: $dark-60;
+  }
+}
