@@ -1,0 +1,513 @@
+@import "common";
+
+@mixin mobile-area_media {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+//클릭효과
+//::after 사용을 최소화하기 위해 클릭 시 배경색 변경으로 수정
+@mixin click-btn_bg($color: #fff, $if: null) {
+  @if $if == null {
+    &:hover {background-color: darken($color, 2%);}
+    &:active {background-color: darken($color, 5%);}
+  } @else {
+    &:hover {background-color: lighten($color, 2%);}
+    &:active {background-color: lighten($color, 5%);}
+  }
+}
+
+.blind {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+.pc_only {
+  display: block;
+
+  @include mobile-area_media {
+    display: none;
+  }
+}
+
+.mo_only {
+  display: none;
+
+  @include mobile-area_media {
+    display: block;
+  }
+}
+
+.scroll-prevent {
+  overflow: hidden;
+  height: 100vh;
+}
+
+i {
+  display: inline-block;
+}
+
+button {
+  i {
+    margin-left: 0.666666em;
+    width: 1.066666em;
+    height: 1.066666em;
+    vertical-align: text-top;
+  }
+}
+
+.btn {
+  @extend %btn;
+
+  &.login {
+    margin-top: 8*$unit;
+    height: 54*$unit;
+  }
+}
+
+.text_btn {
+  padding: 8*$unit;
+  width: auto;
+  @extend %m12;
+  color: $color-primary;
+
+  @include click-btn_bg();
+}
+
+%btn {
+  //기본
+  display: block;
+  padding: 0 12*$unit;
+  height: 40*$unit;
+  border: 1px solid transparent;
+  border-radius: 100*$unit;
+  background-color: $color-primary;
+  @include click_btn_bg($color-primary); //배경색이랑 같은 값을 파라미터로 넣어주기
+  font-size: 15*$unit;
+  color: #fff;
+  word-break: keep-all;
+  line-height: 1.2;
+
+  //비활성화
+  &:disabled {
+    border-color: $dark-30;
+    background-color: $dark-30;
+    color: #fff;
+    cursor: default;
+  }
+
+  //테두리
+  &.bo {
+    //기본
+    border-color: $color-primary;
+    background-color: #fff;
+    @include click_btn_bg(); //배경색이랑 같은 값을 파라미터로 넣어주기
+    color: $color-primary;
+
+    &:disabled {
+      border-color: $dark-30;
+      background-color: $dark-18;
+      color: $dark-30;
+    }
+
+    //회색
+    &.grey {
+      border-color: $dark-30;
+      color: $dark-60;
+    }
+  }
+}
+
+.logo {
+  position: relative;
+  background-image: url("../img/logo_header.svg");
+  background-size: 100% auto;
+
+  & > * {
+    display: block;
+    padding-top: 28%;
+  }
+}
+
+$form-box-height: 40*$unit;
+$form-box-m-height: 40*$unit;
+.form {
+  &_wrap {
+    margin: 20*$unit auto;
+    padding: 20*$unit;
+    width: 280*$unit;
+    max-width: 100%;
+
+    h2 {
+      margin: 54*$unit 0 40*$unit;
+      @extend %b17;
+      text-align: center;
+    }
+  }
+
+  &_li {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 16*$unit; //폼 리스트 사이간격
+
+    & > * {
+      flex: 0 0 auto;
+    }
+
+    .form_in {
+      flex: 1 1 auto;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    input {
+      height: $form-box-height;
+
+      @include mobile-area_media {
+        height: $form-box-m-height;
+      }
+    }
+  }
+
+  &_ttl {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4*$unit;
+    width: 100%;
+    color: $dark-60;
+  }
+
+  &_in {
+    width: 100%;
+    min-height: $form-box-height;
+
+    & > * {
+      margin-top: 4*$unit; //폼 인풋 사이간격
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    @include mobile-area_media {
+      min-height: $form-box-m-height;
+    }
+  }
+
+  .btn {
+    height: $form-box-height;
+
+    @include mobile-area_media {
+      height: $form-box-m-height;
+    }
+  }
+}
+
+/*바인딩*/
+.bind {
+  display: flex;
+  align-items: center;
+  padding: 6*$unit 10*$unit;
+  min-height: 40*$unit;
+  font-weight: $bold;
+}
+
+//힌트문구
+.hint {
+  padding: 0.8em 0;
+  font-size: 12*$unit;
+  font-weight: $medium;
+  color: $dark-30;
+  word-break: keep-all;
+}
+
+/*유효성문구*/
+.valid {
+  display: none;
+  @extend %m12;
+  color: $color-error;
+
+  &.on {
+    display: flex;
+  }
+
+  i {
+    flex: 0 0 auto;
+    margin: 0.083333em 4*$unit 0.083333em 0;
+    width: 1.333333em;
+    height: 1.333333em;
+    vertical-align: text-top;
+  }
+}
+
+%input-common {
+  @include line();
+  border: 1px solid $dark-18; //인풋 보더
+  background-color: white;
+
+  &::placeholder {
+    font-weight: $regular;
+    color: $dark-30;
+  }
+}
+
+input {
+  @extend %input-common;
+  padding: 0 0.8em; //인풋 내부여백
+  min-height: 40*$unit; //인풋 높이
+
+  @include mobile-area_media {
+    padding: 0 0.4em;
+  }
+}
+
+textarea {
+  @extend %input-common;
+  padding: 0.6em 0.8em;
+  height: 240*$unit;
+  white-space: pre-line;
+}
+
+.checkbox, .radio {
+  @extend %m15;
+
+  input {
+    padding: 0;
+    width: 1.333333em;
+    height: 1.33333em;
+    min-height: unset;
+    background: url("../img/i_ch.svg") no-repeat;
+    background-size: contain;
+
+    &:checked {
+      border: 0;
+      background-image: url("../img/i_ched.svg");
+    }
+  }
+
+  label {
+    min-height: 1.333333em;
+
+    & > span {
+      padding-left: 1.666666em;
+    }
+  }
+}
+
+.radio {
+  input {
+    background-image: url("../img/i_rd.svg");
+
+    &:checked {
+      background-image: url("../img/i_rded.svg");
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    gap: 8*$unit;
+  }
+}
+
+.select {
+  position: relative;
+  @include line();
+  padding: 8*$unit 40*$unit 8*$unit 12*$unit;
+  height: 40*$unit;
+  border: 1px solid $dark-18;
+  background: url("../img/i_select_c.svg") no-repeat center right 12*$unit;
+  background-size: 16*$unit;
+  text-align: left;
+  @include click-btn_bg();
+
+  @include mobile-area_media {
+    padding: 8*$unit 32*$unit 8*$unit 8*$unit;
+    background-position: center right 8*$unit;
+  }
+}
+
+.datepicker {
+  @extend .select;
+  background-image: url("../img/i_calendar_c.svg");
+  color: $dark-30;
+
+  &.on {
+    background-image: url("../img/i_x_c.svg");
+    color: $dark;
+  }
+}
+
+.usertype {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: auto;
+  @extend %m12;
+
+  .tag {
+    display: flex;
+    align-items: center;
+    padding: 0 0.666666em;
+    height: 1.666666em;
+    background: $color-primary;
+    color: white;
+  }
+
+  i {
+    margin-left: 0.333333em;
+    width: 1.333333em;
+    height: 1.333333em;
+    background: url("../img/i_info.svg") no-repeat;
+    background-size: contain;
+    opacity: 0.18;
+  }
+
+  &_guide {
+    z-index: 5;
+    @include position(absolute, 0, 70%);
+    display: none;
+    width: 300*$unit;
+    border: 1px solid $dark;
+    background: white;
+    @extend %m15;
+    color: $dark;
+
+    &.on {
+      display: block;
+    }
+
+    &.left {
+      left: unset;
+      right: 0;
+    }
+
+    &__ttl {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 48*$unit;
+      border-bottom: 1px solid $dark-18;
+    }
+
+    &__con {
+      padding: 16*$unit 20*$unit;
+      color: $dark-60;
+      text-align: left;
+
+      ul {
+        display: flex;
+        gap: 20*$unit;
+
+        & > * {
+          flex: 0 0 auto;
+        }
+      }
+
+      b {
+        display: inline-block;
+        margin-bottom: 8*$unit;
+        color: $dark;
+      }
+
+      em {
+        color: $color-primary;
+      }
+
+      small {
+        display: flex;
+        margin-top: 16*$unit;
+        @extend %m12;
+        color: $dark-30;
+        word-break: keep-all;
+
+        &:before {
+          content: "·";
+        }
+      }
+    }
+
+    @include mobile-area_media {
+      &, &.left {
+        @include position-center(xy, fixed);
+      }
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  min-width: 540*$unit;
+  border: 1px solid $dark-18;
+
+  &__wrap {
+    overflow: auto;
+  }
+
+  &__ttl {
+    @include position(sticky, unset, 0);
+    margin-bottom: 16*$unit;
+    color: $dark-60;
+
+    b {
+      margin-right: 4*$unit;
+      color: $color-primary;
+    }
+  }
+
+  th {
+    padding: 12*$unit;
+    background: $dark-05;
+    @extend %m12;
+    color: $dark-30;
+  }
+
+  td {
+    padding: 12*$unit 4*$unit;
+    text-align: center;
+    color: $dark-30;
+  }
+
+  tbody {
+    tr {
+      border-bottom: 0.8px solid $dark-18;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .ttl {
+    display: flex;
+    gap: 4*$unit;
+    padding: 12*$unit;
+    text-align: left;
+    color: $dark;
+
+    b {
+      flex: 0 0 auto;
+      color: $color-primary;
+    }
+  }
+
+  .on {
+    color: $dark;
+  }
+
+  .small {
+    @extend %m12;
+    color: $dark-60;
+  }
+
+  em {
+    @extend %m12;
+    color: $color-primary;
+  }
+}
