@@ -469,6 +469,7 @@ textarea {
   }
 
   &__pagination {
+    @include position(sticky, null, 0, 0, 0);
     display: flex;
     justify-content: center;
     padding-top: 40*$unit;
