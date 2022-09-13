@@ -591,6 +591,28 @@ textarea {
   margin-right: 0.4rem;
   color: #0164FF;
 }
+.table__pagination {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+  color: rgba(33, 33, 33, 0.3);
+}
+.table__pagination button {
+  flex: 0 0 auto;
+  padding: 0 1.2rem;
+  min-width: 3.2rem;
+  width: auto;
+  height: 3.2rem;
+}
+.table__pagination button:hover {
+  background-color: #fafafa;
+}
+.table__pagination button:active {
+  background-color: #f2f2f2;
+}
+.table__pagination button.on {
+  color: #0164FF;
+}
 .table th {
   padding: 1.2rem;
   background: #F8F8F8;

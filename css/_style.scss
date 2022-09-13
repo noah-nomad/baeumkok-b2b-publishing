@@ -468,6 +468,26 @@ textarea {
     }
   }
 
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 40*$unit;
+    color: $dark-30;
+
+    button {
+      flex: 0 0 auto;
+      padding: 0 12*$unit;
+      min-width: 32*$unit;
+      width: auto;
+      height: 32*$unit;
+      @include click-btn_bg();
+
+      &.on {
+        color: $color-primary;
+      }
+    }
+  }
+
   th {
     padding: 12*$unit;
     background: $dark-05;
