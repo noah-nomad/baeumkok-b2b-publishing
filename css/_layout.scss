@@ -235,6 +235,16 @@ body {
       max-width: 100%;
     }
 
+    .input_wrap {
+      display: flex;
+      gap: 12*$unit;
+      max-width: 100%;
+
+      input {
+        width: 160*$unit;
+      }
+    }
+
     .radio {
       @extend %m12;
       color: $dark;
@@ -308,6 +318,14 @@ body {
   align-items: center;
   max-width: 100%;
   background: white;
+
+  &.fixed {
+    flex: 0 0 auto;
+
+    .sum_info__box {
+      min-width: 160*$unit;
+    }
+  }
 
   &__box {
     flex: 1 0 auto;
@@ -446,6 +464,8 @@ body {
 .invoice_info {
   &__wrap {
     display: flex;
+    flex-wrap: wrap;
+    gap: 20*$unit;
   }
 
   dl {
@@ -453,10 +473,24 @@ body {
   }
 
   dt {
+    margin-right: 8*$unit;
     color: $dark-30;
   }
 
   dd {
     color: $dark-60;
+
+    .btn.bo {
+      @include click-btn_bg($dark-05);
+      width: auto;
+      background: $dark-05;
+    }
   }
+}
+
+#company_account {
+  padding: 0;
+  min-height: unset;
+  border: 0;
+  background: transparent;
 }

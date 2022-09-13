@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css">
-    <title>배움콕 튜터</title>
+    <title>배움콕 B2B</title>
 </head>
 <body>
 <!-- ~ <main> 사이에 태그 추가 시, style="height: 100%;" 포함 -->
@@ -38,22 +38,22 @@
         <dl><dt>통신판매업신고</dt><dd>제2020-서울강서-1006호</dd></dl>
     </footer>
 </nav>
-<main class="main class_menu"><!-- 클래스 정보 '.class_menu', 정산 내역 '.calc_menu' -->
+<main class="main">
     <div class="main__top">
         <div class="sum_info">
             <dl class="sum_info__box">
-                <dt>판매 총합</dt>
-                <dd><p>100시간 30분</p></dd>
+                <dt>정산 대기</dt>
+                <dd><p class="on">30분</p></dd>
             </dl>
-            <span>=</span>
+            <span>+</span>
             <dl class="sum_info__box">
                 <dt>정산 완료</dt>
                 <dd><p>100시간</p></dd>
             </dl>
-            <span>+</span>
+            <span>=</span>
             <dl class="sum_info__box">
-                <dt>판매 총합</dt>
-                <dd><p>30분</p></dd>
+                <dt>구매 총합</dt>
+                <dd><p>100시간 30분</p></dd>
             </dl>
         </div>
         <div class="invoice_info__wrap">
@@ -69,7 +69,11 @@
                 </dl>
                 <dl>
                     <dt>계좌번호</dt>
-                    <dd>국민은행<br>123-45-67-890000</dd>
+                    <dd>
+                        <p>국민은행</p>
+                        <input id="company_account" type="text" value="123-45-67-890000" disabled>
+                        <button class="btn bo smaller" onclick="copyAccount(document.getElementById('company_account'))">계좌번호 복사</button>
+                    </dd>
                 </dl>
             </div>
         </div>
@@ -89,43 +93,37 @@
         <div class="table__wrap">
             <table class="table">
                 <colgroup>
-                    <col style="width: 60%">
-                    <col style="width: 10%">
-                    <col style="width: 10%">
-                    <col style="width: 20%">
+                    <col style="width: 25%">
+                    <col style="width: 25%">
+                    <col style="width: 25%">
+                    <col style="width: 25%">
                 </colgroup>
                 <thead>
                     <tr>
-                        <th><p>클립명</p></th>
-                        <th><p>재생시간</p></th>
-                        <th><p>구매자 수</p></th>
-                        <th><p>총 판매시간</p></th>
+                        <th><p>정산 처리일<br><span class="small">2021.06.02 ~ 2021.12.20</span></p></th>
+                        <th><p>정산시간<br><em>16시간 30분</em></p></th>
+                        <th><p>정산금액<br><em>102,740원</em></p></th>
+                        <th><p>결제 정보</p></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="ttl"><b>무료</b><p>카카오모먼트 매체의 이해 카카오모먼트 매체의 이해 카카오모먼트 매체의 이해</p></td>
-                        <td><p>12분</p></td>
-                        <td><p>5명</p></td>
+                        <td><p>2021.12.20</p></td>
                         <td><p class="on">1시간 30분</p></td>
+                        <td><p class="on">9,340원</p></td>
+                        <td><p class="small">국민은행 123-45-67-890000<br>(입금자명: 회사명)</p></td>
                     </tr>
                     <tr>
-                        <td class="ttl"><p>카카오모먼트 매체의 이해</p></td>
-                        <td><p>12분</p></td>
-                        <td><p>5명</p></td>
-                        <td><p>0분</p></td>
+                        <td><p>2021.12.20</p></td>
+                        <td><p class="on">1시간 30분</p></td>
+                        <td><p class="on">9,340원</p></td>
+                        <td><p class="small">국민은행 123-45-67-890000<br>(입금자명: 회사명)</p></td>
                     </tr>
                     <tr>
-                        <td class="ttl"><p>카카오모먼트 매체의 이해</p></td>
-                        <td><p>12분</p></td>
-                        <td><p>5명</p></td>
+                        <td><p>2021.12.20</p></td>
                         <td><p class="on">1시간 30분</p></td>
-                    </tr>
-                    <tr>
-                        <td class="ttl"><p>카카오모먼트 매체의 이해</p></td>
-                        <td><p>12분</p></td>
-                        <td><p>5명</p></td>
-                        <td><p class="on">1시간 30분</p></td>
+                        <td><p class="on">9,340원</p></td>
+                        <td><p class="small">국민은행 123-45-67-890000<br>(입금자명: 회사명)</p></td>
                     </tr>
                 </tbody>
             </table>
@@ -136,6 +134,13 @@
     // on 토글
     function setToggle($el) {
         $el.classList.toggle('on');
+    }
+
+    // 계좌번호 복사
+    function copyAccount($el) {
+        $el.select();
+        $el.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText($el.value);
     }
 </script>
 </body>
